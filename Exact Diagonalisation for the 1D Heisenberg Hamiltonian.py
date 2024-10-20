@@ -15,6 +15,20 @@ def stateVectors(states): #Takes in a list of states
     state_vectors=[np.array(i) for i in states] #list comprehension to convert all states into numpy vectors
     return state_vectors
 
+
+#Creates a list of basis vectors as tuples for the whole hilbert space (used to assign an ordering to the Hamiltonian matrix)
+def basisVectors(N):
+    basis_vectors = [[] for i in range(N)]
+    basis_tuples = []
+    for j in range(len(basis_vectors)):
+        for q in range(N):
+            basis_vectors[j].append(0)
+    for r in range(N):
+        basis_vectors[r][r] = 1
+    for h in range(N):
+        basis_tuples.append(tuple(basis_vectors[h]))      
+    return basis_tuples
+
 #Generating all states in the Hilbert space of an N-site chain of spin 1/2 particles
 def generateStates(N):
     listOfStates = [[] for i in range(2**N)] #creates 2^N lists in the listOfStates to hold our states
@@ -49,4 +63,17 @@ def generateStates(N):
 #print(stateVectors(generateStates(2)))
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-def emptyH()
+#Initialise an empty matrix to be used for the Hamiltonian operator
+#Each element of the matrix is assinged, through the basis map, a pair of indices whose keys in the basis map dictionary are the tuples representing the relevant basis vectors
+def emptyH(N):
+    basisMap = {}
+    stateID = 0
+    for state in basisVectors(N):
+        basisMap[state] = stateID
+        stateID+=1
+    NH = stateID
+    H_matrix = np.zeros([NH,NH])
+    return H_matrix
+
+
+    
