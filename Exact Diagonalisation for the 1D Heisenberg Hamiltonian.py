@@ -42,7 +42,7 @@ def generateStates(N):
     for j in range(len(listOfStates)):
         for k in range(StateVectorLength):
             listOfStates[j].append(-1) #each list in the list of states is ammended with a default configuration of an array of -1 local states
-    print(listOfStates)
+    #print(listOfStates)
     
     #Recognise binary 0's as -1 and binary 1's as +1:
     #Starting from the END of the list representing each state, alter the array of -1's to be equivelant to the binary
@@ -74,6 +74,3 @@ def emptyH(N):
     NH = stateID
     H_matrix = np.zeros([NH,NH])
     return H_matrix
-
-
-    
